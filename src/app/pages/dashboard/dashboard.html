@@ -1,0 +1,92 @@
+<!-- HERO SECTION -->
+<section
+  class="hero"
+  [class.logged-in]="authService.isLoggedIn()"
+>
+
+    <div class="hero-content">
+  
+      <h1>
+        Vote. Participate. Be Heard.
+      </h1>
+  
+      <p>
+        A modern civic engagement platform
+        where users can vote on polls and
+        view real-time results by state.
+      </p>
+  
+      <!-- NOT LOGGED IN -->
+      <div
+        class="hero-buttons"
+        *ngIf="!authService.isLoggedIn()"
+      >
+  
+        <a routerLink="/login">
+          Login
+        </a>
+  
+        <a routerLink="/signup">
+          Signup
+        </a>
+  
+      </div>
+  
+    </div>
+  
+  </section>
+  
+  <!-- SHOW POLLS ONLY IF LOGGED IN -->
+  <div
+    class="dashboard"
+    *ngIf="authService.isLoggedIn()"
+  >
+  
+    <h2>Available Polls</h2>
+  
+    <div
+      class="poll-card"
+      *ngFor="let poll of polls"
+    >
+  
+      <h2>
+        {{ poll.title }}
+      </h2>
+  
+      <p>
+        {{ poll.description }}
+      </p>
+  
+      <p>
+  
+        Status:
+  
+        <span
+          class="status-badge"
+          [ngClass]="{
+            'active': poll.status === 'active',
+            'closed': poll.status === 'closed'
+          }"
+        >
+  
+          {{ poll.status }}
+  
+        </span>
+  
+      </p>
+  
+      <div class="poll-actions">
+  
+        <a [routerLink]="['/poll', poll.id]">
+          View Poll
+        </a>
+  
+        <a [routerLink]="['/results', poll.id]">
+          View Results
+        </a>
+  
+      </div>
+  
+    </div>
+  
+  </div>

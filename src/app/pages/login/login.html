@@ -1,0 +1,104 @@
+
+<div class="auth-container">
+<!-- TOAST -->
+<div
+  class="toast success"
+  *ngIf="successMessage"
+>
+
+  {{ successMessage }}
+
+</div>
+<!-- ERROR TOAST -->
+<div
+class="toast error-toast"
+  *ngIf="errorMessage"
+>
+
+  {{ errorMessage }}
+
+</div>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="auth-form"
+    >
+  
+      <h2>Login</h2>
+  
+      <!-- EMAIL -->
+<input
+type="email"
+placeholder="Email"
+formControlName="email"
+/>
+
+<p
+class="error"
+*ngIf="
+  loginForm.get('email')?.touched &&
+  loginForm.get('email')?.invalid
+"
+>
+
+Please enter a valid email
+
+</p>
+
+<!-- PASSWORD -->
+<div class="password-container">
+
+  <input
+    [type]="
+      showPassword
+        ? 'text'
+        : 'password'
+    "
+    formControlName="password"
+    placeholder="Password"
+  />
+
+  <span
+    class="eye-icon"
+    (click)="togglePassword()"
+  >
+    {{ showPassword ? '🙈' : '👁️' }}
+  </span>
+
+</div>
+
+<p
+class="error"
+*ngIf="
+  loginForm.get('password')?.touched &&
+  loginForm.get('password')?.invalid
+"
+>
+
+Password is required
+
+</p>
+  
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        >
+
+        {{ isLoading ? 'Logging in...' : 'Login' }}
+
+      </button>
+  
+      <!-- SIGNUP LINK -->
+      <p class="auth-link">
+  
+        Oops, don't have an account?
+  
+        <a routerLink="/signup">
+          Signup here
+        </a>
+  
+      </p>
+  
+    </form>
+  
+  </div>

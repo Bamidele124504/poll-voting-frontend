@@ -1,0 +1,59 @@
+<!-- TOAST -->
+<div
+  class="toast success"
+  *ngIf="successMessage"
+>
+
+  {{ successMessage }}
+
+</div>
+<nav class="navbar">
+
+    <!-- LOGO -->
+    <div class="logo">
+      Poll Voting App
+    </div>
+  
+    <!-- HAMBURGER -->
+    <button
+      class="hamburger"
+      (click)="toggleMenu()"
+    >
+      ☰
+    </button>
+  
+    <!-- LINKS -->
+    <div
+      class="links"
+      [class.mobile-open]="menuOpen"
+    >
+  
+      <a routerLink="/">
+        Home
+      </a>
+  
+      <!-- LOGGED IN -->
+      <ng-container
+        *ngIf="authService.isLoggedIn()"
+      >
+  
+        <a
+          routerLink="/admin"
+          *ngIf="authService.isAdmin()"
+        >
+          Manage <br> Polls
+        </a>
+  
+        <a routerLink="/profile">
+          Profile
+        </a>
+  
+        <button (click)="logout()">
+          Logout
+        </button>
+  
+      </ng-container>
+  
+    </div>
+  
+  </nav>

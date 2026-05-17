@@ -1,0 +1,113 @@
+.poll-container {
+    padding: 32px;
+  }
+  
+  .option-card {
+    padding: 20px;
+  
+    margin-top: 20px;
+  
+    border-radius: 12px;
+  
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .option-card button {
+    margin-top: 12px;
+  
+    padding: 10px 20px;
+  
+    border: none;
+  
+    border-radius: 8px;
+  
+    background: #2563eb;
+  
+    color: white;
+  
+    cursor: pointer;
+  }
+  
+  .option-card button:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+
+  .toast {
+    position: fixed;
+  
+    top: 30px;
+  
+    left: 50%;
+  
+    transform: translateX(-50%);
+  
+    padding: 16px 28px;
+  
+    border-radius: 12px;
+  
+    background: #16a34a;
+  
+    color: white;
+  
+    font-weight: bold;
+  
+    font-size: 15px;
+  
+    z-index: 1000;
+  
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  
+    animation: slideDown 0.4s ease;
+  }
+  
+  @keyframes slideDown {
+  
+    from {
+      opacity: 0;
+  
+      transform:
+        translateX(-50%)
+        translateY(-20px);
+    }
+  
+    to {
+      opacity: 1;
+  
+      transform:
+        translateX(-50%)
+        translateY(0);
+    }
+  }
+  button {
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+  
+  button:hover:not(:disabled) {
+    transform: translateY(-2px);
+  
+    opacity: 0.9;
+  }
+  .status-badge {
+    padding: 6px 12px;
+  
+    border-radius: 20px;
+  
+    color: white;
+  
+    font-size: 14px;
+  
+    font-weight: bold;
+  
+    text-transform: capitalize;
+  }
+  
+  .active {
+    background: #16a34a;
+  }
+  
+  .closed {
+    background: crimson;
+  }

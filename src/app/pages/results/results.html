@@ -1,0 +1,79 @@
+<div
+  class="results-container"
+  *ngIf="results"
+>
+
+  <h1>
+    Results
+  </h1>
+
+  <h2>
+    {{ results.poll }}
+  </h2>
+
+  <!-- State Filter -->
+  <div class="filter-box">
+
+    <select
+      [(ngModel)]="selectedState"
+    >
+
+      <option value="">
+        All States
+      </option>
+
+      <option value="Lagos">
+        Lagos
+      </option>
+
+      <option value="Abuja">
+        Abuja
+      </option>
+
+      <option value="Kano">
+        Kano
+      </option>
+
+      <option value="Rivers">
+        Rivers
+      </option>
+
+    </select>
+
+    <button (click)="loadResults()">
+      Filter
+    </button>
+
+  </div>
+
+  <div class="chart-container">
+
+    <canvas
+      baseChart
+      [data]="barChartData"
+      [type]="barChartType"
+    >
+    </canvas>
+  
+  </div>
+
+  <!-- Results -->
+  <div
+    class="result-card"
+    *ngFor="let result of results.results"
+  >
+
+    <h3>
+      {{ result.option }}
+    </h3>
+
+    <p>
+      Votes:
+      <strong>
+        {{ result.votes }}
+      </strong>
+    </p>
+
+  </div>
+
+</div>

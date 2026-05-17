@@ -1,0 +1,139 @@
+<div class="admin-page">
+        <!-- SUCCESS TOAST -->
+    <div
+    class="toast success"
+    *ngIf="successMessage"
+    >
+    {{ successMessage }}
+    </div>
+
+    <!-- ERROR TOAST -->
+    <div
+    class="toast error"
+    *ngIf="errorMessage"
+    >
+    {{ errorMessage }}
+    </div>
+    <!-- LEFT -->
+    <div class="form-section">
+  
+      <form
+        [formGroup]="pollForm"
+        (ngSubmit)="createPoll()"
+        class="admin-form"
+      >
+  
+        <h2>Create Poll</h2>
+  
+        <input
+          type="text"
+          placeholder="Poll Title"
+          formControlName="title"
+        />
+  
+        <textarea
+          placeholder="Description"
+          formControlName="description"
+        ></textarea>
+  
+        <!-- Options -->
+        <div formArrayName="options">
+  
+          <div
+            *ngFor="
+              let option of options.controls;
+              let i = index
+            "
+          >
+  
+            <input
+              type="text"
+              [formControlName]="i"
+              placeholder="Option"
+            />
+  
+          </div>
+  
+        </div>
+  
+        <button
+          type="button"
+          (click)="addOption()"
+        >
+          Add Option
+        </button>
+  
+        <button type="submit">
+          Create Poll
+        </button>
+  
+      </form>
+  
+    </div>
+  
+    <!-- RIGHT -->
+    <div class="polls-section">
+  
+      <h2>Manage Polls</h2>
+  
+      <div
+        class="poll-card"
+        *ngFor="let poll of polls"
+      >
+  
+        <h3>
+          {{ poll.title }}
+        </h3>
+  
+        <p>
+          {{ poll.description }}
+        </p>
+  
+        <p>
+
+            Status:
+          
+            <span
+              class="status-badge"
+              [ngClass]="{
+                'active': poll.status === 'active',
+                'closed': poll.status === 'closed'
+              }"
+            >
+          
+              {{ poll.status }}
+          
+            </span>
+          
+          </p>
+  
+        <div class="poll-buttons">
+
+            <button
+            class="close-btn"
+            (click)="togglePollStatus(poll.id)"
+            >
+
+            {{
+                poll.status === 'active'
+                ? 'Close Poll'
+                : 'Reopen Poll'
+            }}
+
+            </button>
+            
+          
+            <button
+              class="delete-btn"
+              (click)="deletePoll(poll.id)"
+            >
+              Delete Poll
+            </button>
+          
+          </div>
+  
+      </div>
+  
+    </div>
+  
+  </div>

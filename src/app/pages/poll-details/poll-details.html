@@ -1,0 +1,59 @@
+<!-- TOAST -->
+<div
+  class="toast"
+  *ngIf="successMessage"
+>
+
+  {{ successMessage }}
+
+</div>
+<div
+  class="poll-container"
+  *ngIf="poll"
+>
+
+  <h1>
+    {{ poll.title }}
+  </h1>
+
+  <p>
+    {{ poll.description }}
+  </p>
+
+  <p>
+
+    Status:
+  
+    <span
+      class="status-badge"
+      [ngClass]="{
+        'active': poll.status === 'active',
+        'closed': poll.status === 'closed'
+      }"
+    >
+  
+      {{ poll.status }}
+  
+    </span>
+  
+  </p>
+
+  <div
+    class="option-card"
+    *ngFor="let option of poll.options"
+  >
+
+    <h3>
+      {{ option.optionText }}
+    </h3>
+
+    <button
+      (click)="vote(option.id)"
+      [disabled]="poll.status === 'closed'"
+    >
+      Vote
+    </button>
+
+  </div>
+
+</div>

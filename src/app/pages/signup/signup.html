@@ -1,0 +1,197 @@
+<div class="auth-container">
+<!-- TOAST -->
+    <div
+    class="toast success"
+    *ngIf="successMessage"
+    >
+
+    {{ successMessage }}
+
+    </div>
+    <!-- ERROR TOAST -->
+        <div
+        class="toast error-toast"
+        *ngIf="errorMessage"
+        >
+
+        {{ errorMessage }}
+
+        </div>
+    <form
+      [formGroup]="signupForm"
+      (ngSubmit)="onSubmit()"
+      class="auth-form"
+    >
+  
+      <h2>Create Account</h2>
+  
+      <!-- NAME -->
+<input
+type="text"
+placeholder="Full Name"
+formControlName="name"
+/>
+
+<p
+class="error"
+*ngIf="
+  signupForm.get('name')?.touched &&
+  signupForm.get('name')?.invalid
+"
+>
+
+Name is required
+
+</p>
+
+<!-- EMAIL -->
+<input
+type="email"
+placeholder="Email"
+formControlName="email"
+/>
+
+<p
+class="error"
+*ngIf="
+  signupForm.get('email')?.touched &&
+  signupForm.get('email')?.invalid
+"
+>
+
+Please enter a valid email
+
+</p>
+
+<!-- PASSWORD -->
+<div class="password-container">
+
+  <input
+    [type]="
+      showPassword
+        ? 'text'
+        : 'password'
+    "
+    formControlName="password"
+    placeholder="Password"
+  />
+
+  <span
+    class="eye-icon"
+    (click)="togglePassword()"
+  >
+    {{ showPassword ? '🙈' : '👁️' }}
+  </span>
+
+</div>
+
+<p
+class="error"
+*ngIf="
+  signupForm.get('password')?.touched &&
+  signupForm.get('password')?.invalid
+"
+>
+<div
+  class="password-rules"
+  *ngIf="
+    signupForm.get('password')?.touched
+  "
+>
+
+  <p>Password must contain:</p>
+
+  <p
+    [class.valid]="hasMinLength()"
+    [class.invalid]="!hasMinLength()"
+  >
+    • 8+ characters
+  </p>
+
+  <p
+    [class.valid]="hasUpperCase()"
+    [class.invalid]="!hasUpperCase()"
+  >
+    • uppercase letter
+  </p>
+
+  <p
+    [class.valid]="hasLowerCase()"
+    [class.invalid]="!hasLowerCase()"
+  >
+    • lowercase letter
+  </p>
+
+  <p
+    [class.valid]="hasNumber()"
+    [class.invalid]="!hasNumber()"
+  >
+    • number
+  </p>
+
+  <p
+    [class.valid]="hasSpecialChar()"
+    [class.invalid]="!hasSpecialChar()"
+  >
+    • special character
+  </p>
+
+</div>
+
+<!-- STATE -->
+<select formControlName="state">
+
+    <option value="">
+      Select State
+    </option>
+  
+    <option
+      *ngFor="let state of states"
+      [value]="state"
+    >
+  
+      {{ state }}
+  
+    </option>
+  
+  </select>
+
+<p
+class="error"
+*ngIf="
+  signupForm.get('state')?.touched &&
+  signupForm.get('state')?.invalid
+"
+>
+
+State is required
+
+</p>
+  
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        >
+
+        {{
+            isLoading
+            ? 'Creating account...'
+            : 'Signup'
+        }}
+
+        </button>
+        
+      <!-- LOGIN LINK -->
+      <p class="auth-link">
+  
+        Already have an account?
+  
+        <a routerLink="/login">
+          Login here
+        </a>
+  
+      </p>
+  
+    </form>
+  
+  </div>
