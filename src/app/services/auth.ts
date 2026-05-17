@@ -97,15 +97,20 @@ export class AuthService {
   // LOGOUT
   logout() {
 
-    localStorage.removeItem('token');
-
-    localStorage.removeItem('userEmail');
-
-    localStorage.removeItem('userRole');
-
+    localStorage.removeItem(
+      'token'
+    );
+  
+    localStorage.removeItem(
+      'userEmail'
+    );
+  
+    localStorage.removeItem(
+      'role'
+    );
+  
     this.authState$.next(false);
   }
-
   // CHECK LOGIN
   isLoggedIn(): boolean {
 
@@ -115,9 +120,11 @@ export class AuthService {
   // CHECK ADMIN
   isAdmin(): boolean {
 
-    return localStorage.getItem(
-      'userRole'
-    ) === 'admin';
+    return (
+      localStorage.getItem(
+        'role'
+      ) === 'admin'
+    );
   }
 
   // GET TOKEN

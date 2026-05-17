@@ -1,5 +1,5 @@
 export const environment = {
 
-    apiUrl: 'http://localhost:3000',
+    apiUrl: 'https://poll-voting-api.onrender.com',
   
   };
